@@ -7,7 +7,8 @@ Hjemmesiden for Forlaget Uldahl. Ren HTML og CSS uden byggetrin. Hostes på GitH
 - `index.html`: dansk forside. `en/index.html`: engelsk forside. Alt indhold ligger på de to sider.
 - De gamle adresser (`om-forlaget/`, `kontakt/`, `en/about/` osv.) sender videre til det rigtige sted på forsiden.
 - `assets/css/style.css`: animationer, hover og formular. Resten af designet står som inline styles i HTML.
-- `assets/js/site.js`: årstidsvælgeren og kontaktformularen. Formularens nøgle står i `FORM_KEY`.
+- `assets/js/site.js`: årstidsvælgeren og takkebeskeden efter kontaktformularen.
+- Kontaktformularen sendes med FormSubmit til kasper@ai-workshop.dk, ligesom på Kaspers andre sider.
 - `assets/images/`: `maerke.png` (logo og favicon), `skilt.jpg` (åbningen), `kasper.jpg`.
 - Teksterne til årstiderne står i `window.AARSTIDER` nederst i hver HTML-fil.
 

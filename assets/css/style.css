@@ -58,7 +58,7 @@ svg[preserveAspectRatio="none"] path{vector-effect:non-scaling-stroke}
 .kform textarea{min-height:150px;resize:vertical}
 .kform button{min-height:50px;padding:0 34px;cursor:pointer;background:#1C2330;border:1px solid #1C2330;color:#F4F0EC;font-family:'Inter',sans-serif;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
 .kform button[disabled]{opacity:.6;cursor:default}
-.kform .honning{position:absolute;left:-9999px}
+.kform .honning{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .kform .status{margin:18px 0 0;padding:14px 16px;border:1px solid #B08A52;background:#F4F0EC;font-size:16px}
 .kform .status[hidden]{display:none}
 .kform .man{margin:22px 0 0;font-size:15.5px;color:#4A5163}
