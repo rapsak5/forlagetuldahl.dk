@@ -4,18 +4,17 @@ Hjemmesiden for Forlaget Uldahl. Ren HTML og CSS uden byggetrin. Hostes på GitH
 
 ## Struktur
 
-- Danske sider i roden: `index.html`, `om-forlaget/`, `udgivelser/`, `for-forfattere/`, `kontakt/`
-- Engelske sider under `en/`: `en/`, `en/about/`, `en/books/`, `en/for-authors/`, `en/contact/`
-- `assets/css/style.css`: hele designet. Farver og skrifter står som variabler øverst.
-- `assets/js/site.js`: mobilmenu og kontaktformular. Formularens nøgle står i `FORM_KEY`.
-- `assets/images/`: `maerke-guld.png` (header og favicon), `logo.png` (footer), `mockup-skilt.png` (banner), `kasper.jpg`
+- `index.html`: dansk forside. `en/index.html`: engelsk forside. Alt indhold ligger på de to sider.
+- De gamle adresser (`om-forlaget/`, `kontakt/`, `en/about/` osv.) sender videre til det rigtige sted på forsiden.
+- `assets/css/style.css`: animationer, hover og formular. Resten af designet står som inline styles i HTML.
+- `assets/js/site.js`: årstidsvælgeren og kontaktformularen. Formularens nøgle står i `FORM_KEY`.
+- `assets/images/`: `maerke.png` (logo og favicon), `skilt.jpg` (åbningen), `kasper.jpg`.
+- Teksterne til årstiderne står i `window.AARSTIDER` nederst i hver HTML-fil.
 
 ## Regler ved ændringer
 
-- Header, menu og footer står i hver HTML-fil. En ændring dér skal laves i alle sider.
-- Hver side findes på dansk og engelsk. Ret altid begge.
-- Links er relative (`../`), så siden også virker på en github.io-adresse.
+- Hver ændring skal laves på både dansk og engelsk.
 - Forlaget er nyt. Tekster må ikke love mere, end et nyt forlag kan stå inde for.
 - Ingen partnernavne, bogomslag eller mockups af titler, før der er en aftale.
-- Danske tekster: korte sætninger, ingen hype, ingen tankestreger.
-- Designet er godkendt. Hold dig til variablerne i `style.css`.
+- Danske tekster: korte sætninger, almindeligt sprog, ingen hype, ingen tankestreger.
+- Farver: navy #1C2330, skov #0D1F16, guld #B08A52 og #C9A86A, papir #F4F0EC. Skrifter: Cormorant Garamond, Lora, Inter.

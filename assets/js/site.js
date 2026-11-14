@@ -1,60 +1,72 @@
-// Forlaget Uldahl: menu, header og kontaktformular.
+// Forlaget Uldahl: årstidsvælger og kontaktformular.
 // Kontaktformularen sendes via Web3Forms til kontakt@forlagetuldahl.dk.
-// Indsæt adgangsnøglen her. Uden nøgle viser formularen en besked med mailadressen.
+// Indsæt adgangsnøglen i FORM_KEY. Uden nøgle åbner formularen besøgerens mailprogram med beskeden udfyldt.
 const FORM_KEY = '';
 
-const knap = document.querySelector('.menu-knap');
-const menu = document.querySelector('.hovedmenu');
-if (knap && menu) {
-  knap.addEventListener('click', () => {
-    const aaben = menu.classList.toggle('aaben');
-    knap.setAttribute('aria-expanded', String(aaben));
-  });
-}
-const header = document.querySelector('.site-header');
-if (header) {
-  const tjek = () => header.classList.toggle('er-scrollet', window.scrollY > 8);
-  window.addEventListener('scroll', tjek, { passive: true });
-  tjek();
-}
+(function () {
+  const data = window.AARSTIDER;
+  const faner = document.querySelectorAll('.fane[data-aarstid]');
+  if (!data || !faner.length) return;
+  const sol = document.getElementById('sol');
+  const timer = document.getElementById('timer');
+  const lys = document.getElementById('lys');
+  const note = document.getElementById('solnote');
+  const dal = document.getElementById('dal');
+  const hvor = document.querySelectorAll('[data-t="hvor"]');
+  const hvad = document.querySelectorAll('[data-t="hvad"]');
+  function vis(id) {
+    const d = data[id];
+    if (!d) return;
+    faner.forEach((f) => f.setAttribute('aria-pressed', String(f.dataset.aarstid === id)));
+    sol.style.transform = 'translateY(' + d.solY + 'px)';
+    timer.textContent = d.timerTekst;
+    lys.style.width = Math.round((d.timer / 24) * 1000) / 10 + '%';
+    note.textContent = d.note;
+    dal.setAttribute('aria-label', d.navn + '. ' + d.timerTekst);
+    d.ting.forEach((t, i) => { hvor[i].textContent = t.hvor; hvad[i].textContent = t.hvad; });
+  }
+  faner.forEach((f) => f.addEventListener('click', () => vis(f.dataset.aarstid)));
+  // Start på den årstid, det er nu.
+  const m = new Date().getMonth();
+  vis(m <= 1 || m === 11 ? 'vinter' : m <= 4 ? 'forar' : m <= 7 ? 'sommer' : 'efterar');
+})();
 
-const form = document.querySelector('.kontaktform');
-if (form) {
-  const besked = form.querySelector('.form-besked');
-  const sendKnap = form.querySelector('button[type=submit]');
+(function () {
+  const form = document.querySelector('.kform');
+  if (!form) return;
+  const status = form.querySelector('.status');
+  const knap = form.querySelector('button[type=submit]');
   const t = form.dataset;
-  const vis = (tekst) => { besked.textContent = tekst; besked.hidden = false; };
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  const vis = (tekst) => { status.textContent = tekst; status.hidden = false; };
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
     const f = form.elements;
     if (f.website.value) return; // spamfælde
     const email = f.email.value.trim();
-    if (!f.fornavn.value.trim() || !f.besked.value.trim() || !/^\S+@\S+\.\S+$/.test(email)) {
-      return vis(t.mangler);
+    const navn = (f.fornavn.value.trim() + ' ' + f.efternavn.value.trim()).trim();
+    const besked = f.besked.value.trim();
+    const emne = f.emne.value.trim() || 'Besked fra forlagetuldahl.dk';
+    if (!f.fornavn.value.trim() || !besked || !/^\S+@\S+\.\S+$/.test(email)) return vis(t.mangler);
+    if (!FORM_KEY) {
+      window.location.href = 'mailto:kontakt@forlagetuldahl.dk?subject=' + encodeURIComponent(emne) +
+        '&body=' + encodeURIComponent(besked + '\n\n' + navn + '\n' + email);
+      return;
     }
-    if (!FORM_KEY) return vis(t.fejl);
-    sendKnap.disabled = true;
+    knap.disabled = true;
     try {
       const svar = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: FORM_KEY,
-          from_name: 'forlagetuldahl.dk',
-          subject: f.emne.value.trim() || 'Besked fra forlagetuldahl.dk',
-          name: (f.fornavn.value.trim() + ' ' + f.efternavn.value.trim()).trim(),
-          email,
-          message: f.besked.value.trim(),
-        }),
+        body: JSON.stringify({ access_key: FORM_KEY, from_name: 'forlagetuldahl.dk', subject: emne, name: navn, email, message: besked }),
       });
-      const data = await svar.json();
-      if (!data.success) throw new Error(data.message || 'fejl');
+      const res = await svar.json();
+      if (!res.success) throw new Error(res.message || 'fejl');
       form.reset();
       vis(t.tak);
     } catch (fejl) {
       vis(t.fejl);
     } finally {
-      sendKnap.disabled = false;
+      knap.disabled = false;
     }
   });
-}
+})();
