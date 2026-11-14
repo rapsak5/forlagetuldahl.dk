@@ -38,8 +38,8 @@ a{color:#1C2330}a:hover{color:#80612F}
 @keyframes faldstor{0%{transform:translate(0,-20px) rotate(0);opacity:0}12%{opacity:1}85%{opacity:1}100%{transform:translate(-50px,330px) rotate(220deg);opacity:0}}
 .damp{opacity:0;animation:damp 3.6s ease-in-out infinite}
 @keyframes damp{0%{opacity:0;transform:translateY(4px)}35%{opacity:.85}100%{opacity:0;transform:translateY(-14px)}}
-.skud{opacity:0;animation:skud 9s ease-in infinite}
-@keyframes skud{0%,62%{opacity:0;transform:translate(0,0)}66%{opacity:1}80%,100%{opacity:0;transform:translate(-130px,53px)}}
+.skud{opacity:0;animation:skud 5s ease-in infinite}
+@keyframes skud{0%,42%{opacity:0;transform:translate(0,0)}48%{opacity:1}70%,100%{opacity:0;transform:translate(-130px,53px)}}
 .stjerner circle{animation:blink 3.4s ease-in-out infinite alternate}.stjerner circle:nth-child(2){animation-delay:1.1s}.stjerner circle:nth-child(3){animation-delay:2s}.stjerner circle:nth-child(4){animation-delay:.6s}.stjerner circle:nth-child(5){animation-delay:2.6s}
 @keyframes blink{from{opacity:.35}to{opacity:1}}
 :focus-visible{outline:2px solid #B08A52;outline-offset:3px}
