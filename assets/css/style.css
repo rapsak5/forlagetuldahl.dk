@@ -32,8 +32,18 @@ a{color:#1C2330}a:hover{color:#80612F}
 .dagslys{transition:width 1.1s cubic-bezier(.4,0,.2,1)}
 .plads{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .plads:hover{transform:translateY(-4px)}
+.blad{transform-box:fill-box;transform-origin:center;animation:fald 8s linear infinite both}
+.blad-stor{animation-name:faldstor}
+@keyframes fald{0%{transform:translate(0,-10px) rotate(0);opacity:0}12%{opacity:1}85%{opacity:1}100%{transform:translate(-26px,190px) rotate(220deg);opacity:0}}
+@keyframes faldstor{0%{transform:translate(0,-20px) rotate(0);opacity:0}12%{opacity:1}85%{opacity:1}100%{transform:translate(-50px,330px) rotate(220deg);opacity:0}}
+.damp{opacity:0;animation:damp 3.6s ease-in-out infinite}
+@keyframes damp{0%{opacity:0;transform:translateY(4px)}35%{opacity:.85}100%{opacity:0;transform:translateY(-14px)}}
+.skud{opacity:0;animation:skud 9s ease-in infinite}
+@keyframes skud{0%,62%{opacity:0;transform:translate(0,0)}66%{opacity:1}80%,100%{opacity:0;transform:translate(-130px,53px)}}
+.stjerner circle{animation:blink 3.4s ease-in-out infinite alternate}.stjerner circle:nth-child(2){animation-delay:1.1s}.stjerner circle:nth-child(3){animation-delay:2s}.stjerner circle:nth-child(4){animation-delay:.6s}.stjerner circle:nth-child(5){animation-delay:2.6s}
+@keyframes blink{from{opacity:.35}to{opacity:1}}
 :focus-visible{outline:2px solid #B08A52;outline-offset:3px}
-@media (prefers-reduced-motion:reduce){.kurve,.zoom,.ind,.ind2,.ind3{animation:none}.sol,.dagslys,.spalte,.spalte .ikon,.plads,.ramme img{transition:none}}
+@media (prefers-reduced-motion:reduce){.kurve,.zoom,.ind,.ind2,.ind3,.blad,.damp,.skud,.stjerner circle{animation:none}.sol,.dagslys,.spalte,.spalte .ikon,.plads,.ramme img{transition:none}}
 
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 img{max-width:100%}
