@@ -61,7 +61,7 @@ p{margin:0 0 1.25em}
 
 /* Banner */
 .banner{position:relative;min-height:clamp(460px,64vh,640px);display:flex;align-items:flex-end;background-color:var(--navy);overflow:hidden}
-.banner::before{content:"";position:absolute;inset:0;background-image:var(--banner);background-size:cover;background-position:center 42%;transform:scale(1.02)}
+.banner::before{content:"";position:absolute;inset:0;background-image:url(../images/mockup-skilt.png);background-size:cover;background-position:center 42%;transform:scale(1.02)}
 .banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,14,12,.28) 0%,rgba(15,14,12,.52) 45%,rgba(28,35,48,.90) 100%)}
 .banner-indhold{position:relative;z-index:2;width:100%;padding:clamp(3rem,7vw,5rem) 0 clamp(2.8rem,5vw,4rem);color:var(--papir-lys)}
 .banner h1{color:var(--papir-lys);margin-bottom:1.1rem;text-shadow:0 2px 24px rgba(15,14,12,.45)}
